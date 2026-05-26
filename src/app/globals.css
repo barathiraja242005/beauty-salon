@@ -1,26 +1,179 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ═══════════════════════════════════════
+   THEME VARIABLES  (4 professional themes)
+   ═══════════════════════════════════════ */
+
+/* ── Theme 1: Champagne & Rose Gold (default) ── */
+:root, [data-theme="champagne"] {
+  --g-from:     #C27A5A;
+  --g-to:       #A85C3A;
+  --g-mid:      #B56A48;
+  --dark-from:  #2C1810;
+  --dark-via:   #1E1008;
+  --dark-to:    #261410;
+  --site-bg:    #FAF7F3;
+  --site-bg2:   #F2EAE0;
+  --border:     #E8DDD4;
+  --text-h:     #2C1810;
+  --text-m:     #8A7060;
+  --accent:     #C9A96E;
+  --card-bg:    #FFFFFF;
+  --badge-bg:   rgba(194,122,90,0.12);
+  --badge-text: #A85C3A;
+  --input-ring: #C27A5A;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ── Theme 2: Slate & Blush ── */
+[data-theme="slate"] {
+  --g-from:     #4A5568;
+  --g-to:       #2D3748;
+  --g-mid:      #3A4558;
+  --dark-from:  #1A202C;
+  --dark-via:   #0D1117;
+  --dark-to:    #151C28;
+  --site-bg:    #F7F9FC;
+  --site-bg2:   #EDF0F5;
+  --border:     #DDE3ED;
+  --text-h:     #1A202C;
+  --text-m:     #718096;
+  --accent:     #DA8A85;
+  --card-bg:    #FFFFFF;
+  --badge-bg:   rgba(74,85,104,0.10);
+  --badge-text: #2D3748;
+  --input-ring: #4A5568;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ── Theme 3: Sage & Ivory ── */
+[data-theme="sage"] {
+  --g-from:     #5A7A5A;
+  --g-to:       #3D5A3D;
+  --g-mid:      #4D6B4D;
+  --dark-from:  #1E2A1E;
+  --dark-via:   #141C14;
+  --dark-to:    #1A2418;
+  --site-bg:    #F7FAF5;
+  --site-bg2:   #EAF0E5;
+  --border:     #D8E5D0;
+  --text-h:     #1E2A1E;
+  --text-m:     #7A8C7A;
+  --accent:     #A89070;
+  --card-bg:    #FFFFFF;
+  --badge-bg:   rgba(90,122,90,0.10);
+  --badge-text: #3D5A3D;
+  --input-ring: #5A7A5A;
 }
+
+/* ── Theme 4: Plum & Gold ── */
+[data-theme="plum"] {
+  --g-from:     #7B4F8A;
+  --g-to:       #4E2E68;
+  --g-mid:      #653C79;
+  --dark-from:  #1A0A24;
+  --dark-via:   #100618;
+  --dark-to:    #160820;
+  --site-bg:    #FAF6FB;
+  --site-bg2:   #F0E8F5;
+  --border:     #E0D0EB;
+  --text-h:     #1A0A24;
+  --text-m:     #8A6A96;
+  --accent:     #C8A84B;
+  --card-bg:    #FFFFFF;
+  --badge-bg:   rgba(123,79,138,0.10);
+  --badge-text: #4E2E68;
+  --input-ring: #7B4F8A;
+}
+
+/* ═══════════════════════════════════════
+   TAILWIND THEME TOKENS
+   ═══════════════════════════════════════ */
+@theme {
+  --font-heading: var(--font-playfair), Georgia, serif;
+  --font-body:    var(--font-inter), system-ui, sans-serif;
+}
+
+/* ═══════════════════════════════════════
+   SEMANTIC UTILITY CLASSES
+   ═══════════════════════════════════════ */
+
+/* Primary gradient (buttons, icons, active states) */
+.g-primary {
+  background: linear-gradient(135deg, var(--g-from) 0%, var(--g-to) 100%);
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, var(--g-from) 0%, var(--g-mid) 50%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Dark hero / section background */
+.g-dark {
+  background: linear-gradient(135deg, var(--dark-from) 0%, var(--dark-via) 50%, var(--dark-to) 100%);
+}
+
+/* Site background */
+.site-bg   { background-color: var(--site-bg); }
+.site-bg2  { background-color: var(--site-bg2); }
+.site-border { border-color: var(--border); }
+
+/* Themed text */
+.t-heading { color: var(--text-h); }
+.t-muted   { color: var(--text-m); }
+.t-accent  { color: var(--accent); }
+
+/* Blob decorations */
+.g-blob-1 { background: linear-gradient(135deg, color-mix(in srgb, var(--g-from) 30%, transparent), color-mix(in srgb, var(--g-to) 20%, transparent)); }
+.g-blob-2 { background: linear-gradient(315deg, color-mix(in srgb, var(--g-mid) 25%, transparent), color-mix(in srgb, var(--accent) 15%, transparent)); }
+
+/* Card shadow */
+.card-shadow { box-shadow: 0 4px 24px color-mix(in srgb, var(--g-from) 12%, transparent); }
+.card-shadow-lg { box-shadow: 0 12px 48px color-mix(in srgb, var(--g-from) 18%, transparent); }
+
+/* Badge */
+.theme-badge {
+  background: var(--badge-bg);
+  color: var(--badge-text);
+}
+
+/* Focus ring */
+.theme-ring:focus { outline: none; box-shadow: 0 0 0 3px color-mix(in srgb, var(--g-from) 35%, transparent); }
+
+/* ═══════════════════════════════════════
+   BASE STYLES
+   ═══════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--site-bg);
+  color: var(--text-h);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); }
+
+/* ═══════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════ */
+@keyframes float-slow   { 0%,100%{transform:translateY(0) rotate(0) scale(1)} 33%{transform:translateY(-30px) rotate(3deg) scale(1.04)} 66%{transform:translateY(15px) rotate(-2deg) scale(.97)} }
+@keyframes float-medium { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-20px)} }
+@keyframes shimmer      { 0%{background-position:-200% center} 100%{background-position:200% center} }
+
+.animate-float-slow   { animation: float-slow   8s ease-in-out infinite; }
+.animate-float-medium { animation: float-medium 6s ease-in-out infinite; }
+.animate-float-delay  { animation: float-slow   8s ease-in-out 2.5s infinite; }
+
+/* Theme transition */
+* { transition-property: background-color, border-color, color; transition-duration: 0.35s; transition-timing-function: ease; }
+/* Don't transition transforms/opacity (breaks animations) */
+[class*="animate-"], [class*="motion"] { transition: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration:.01ms!important; transition-duration:.01ms!important; }
 }
