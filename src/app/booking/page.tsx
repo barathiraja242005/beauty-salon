@@ -23,22 +23,22 @@ const timeSlots = [
 
 const perks = [
   { icon: CheckCircle, text: "Instant confirmation via phone" },
-  { icon: Clock, text: "Flexible rescheduling" },
-  { icon: Sparkles, text: "Premium experience guaranteed" },
+  { icon: Clock,       text: "Flexible rescheduling" },
+  { icon: Sparkles,    text: "Premium experience guaranteed" },
 ];
 
 function Field({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) {
   return (
     <div>
-      <label className="block text-sm font-medium text-gray-700 mb-1.5">
-        {label} {required && <span className="text-pink-500">*</span>}
+      <label className="block text-xs font-medium text-[#4A3040] mb-1.5 tracking-wider uppercase">
+        {label} {required && <span className="text-[#C96B8A]">*</span>}
       </label>
       {children}
     </div>
   );
 }
 
-const inputCls = "w-full px-4 py-3.5 rounded-2xl border border-gray-200 bg-white text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all placeholder:text-gray-400";
+const inputCls = "w-full px-4 py-3.5 rounded-2xl border border-[#EDD0D8] bg-white text-[#2A1520] text-sm focus:outline-none focus:ring-2 focus:ring-[#C96B8A]/40 focus:border-[#C96B8A] transition-all placeholder:text-[#A89098]";
 const inputWithIcon = "pl-11 " + inputCls;
 
 function BookingForm() {
@@ -78,14 +78,14 @@ function BookingForm() {
         >
           <CheckCircle className="w-10 h-10 text-white" />
         </motion.div>
-        <h2 className="text-3xl font-bold text-pink-950 mb-3" style={{ fontFamily: "var(--font-heading)" }}>
-          Booking Confirmed!
+        <h2 className="text-3xl font-light text-[#2A1520] mb-3" style={{ fontFamily: "var(--font-heading)" }}>
+          Booking <em className="gradient-text not-italic font-semibold">Confirmed!</em>
         </h2>
-        <p className="text-gray-500 mb-2">Thank you, <strong>{form.name}</strong>! We&apos;ve received your request.</p>
-        <p className="text-gray-400 text-sm">We&apos;ll call you at {form.phone} to confirm your slot.</p>
+        <p className="text-[#7A5A66] mb-2">Thank you, <strong className="text-[#2A1520]">{form.name}</strong>! We&apos;ve received your request.</p>
+        <p className="text-[#A89098] text-sm">We&apos;ll call you at {form.phone} to confirm your slot.</p>
         <button
           onClick={() => { setForm({ name:"",phone:"",email:"",service:"",date:"",time:"",notes:"" }); setStatus("idle"); }}
-          className="mt-8 px-7 py-3.5 rounded-full bg-gradient-to-r g-primary text-white font-semibold cursor-pointer hover:shadow-lg hover:shadow-pink-300/30 transition-shadow duration-300"
+          className="mt-8 px-7 py-3.5 rounded-full g-primary text-white font-semibold text-sm tracking-widest uppercase cursor-pointer hover:opacity-90 transition-opacity duration-300"
         >
           Book Another Appointment
         </button>
@@ -98,13 +98,13 @@ function BookingForm() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <Field label="Full Name" required>
           <div className="relative">
-            <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A89098]" />
             <input type="text" required value={form.name} onChange={set("name")} placeholder="Your full name" className={inputWithIcon} />
           </div>
         </Field>
         <Field label="Phone Number" required>
           <div className="relative">
-            <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A89098]" />
             <input type="tel" required value={form.phone} onChange={set("phone")} placeholder="+91 98765 43210" className={inputWithIcon} />
           </div>
         </Field>
@@ -112,7 +112,7 @@ function BookingForm() {
 
       <Field label="Email Address">
         <div className="relative">
-          <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+          <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A89098]" />
           <input type="email" value={form.email} onChange={set("email")} placeholder="you@example.com" className={inputWithIcon} />
         </div>
       </Field>
@@ -127,13 +127,20 @@ function BookingForm() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <Field label="Preferred Date" required>
           <div className="relative">
-            <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-            <input type="date" required value={form.date} onChange={set("date")} min={new Date().toISOString().split("T")[0]} className={inputWithIcon + " cursor-pointer"} />
+            <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A89098]" />
+            <input
+              type="date"
+              required
+              value={form.date}
+              onChange={set("date")}
+              min={new Date().toISOString().split("T")[0]}
+              className={inputWithIcon + " cursor-pointer"}
+            />
           </div>
         </Field>
         <Field label="Preferred Time" required>
           <div className="relative">
-            <Clock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <Clock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A89098]" />
             <select required value={form.time} onChange={set("time")} className={inputWithIcon + " cursor-pointer appearance-none"}>
               <option value="">Select time...</option>
               {timeSlots.map((t) => <option key={t} value={t}>{t}</option>)}
@@ -144,7 +151,7 @@ function BookingForm() {
 
       <Field label="Special Requests">
         <div className="relative">
-          <MessageSquare className="absolute left-4 top-4 w-4 h-4 text-gray-400" />
+          <MessageSquare className="absolute left-4 top-4 w-4 h-4 text-[#A89098]" />
           <textarea rows={3} value={form.notes} onChange={set("notes")} placeholder="Any allergies or special requests..." className={inputWithIcon + " resize-none"} />
         </div>
       </Field>
@@ -160,7 +167,7 @@ function BookingForm() {
         whileTap={{ scale: 0.98 }}
         type="submit"
         disabled={status === "loading"}
-        className="w-full py-4 rounded-2xl bg-gradient-to-r g-primary text-white font-semibold text-base shadow-xl shadow-pink-300/30 hover:shadow-pink-400/40 disabled:opacity-60 disabled:cursor-not-allowed transition-shadow duration-300 cursor-pointer flex items-center justify-center gap-2"
+        className="w-full py-4 rounded-2xl g-primary text-white font-semibold text-sm tracking-widest uppercase shadow-xl disabled:opacity-60 disabled:cursor-not-allowed transition-opacity duration-300 cursor-pointer flex items-center justify-center gap-2"
       >
         {status === "loading" ? <><Loader2 className="w-4 h-4 animate-spin" /> Booking...</> : "Confirm Appointment"}
       </motion.button>
@@ -180,11 +187,16 @@ export default function BookingPage() {
         {/* Parallax Hero */}
         <section ref={heroRef} className="relative h-60 md:h-80 flex items-center justify-center overflow-hidden">
           <motion.div style={{ y: bgY }} className="absolute inset-0 g-dark" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(236,72,153,0.2),transparent_70%)]" />
-          <motion.div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#FDF2F8] to-transparent" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(201,162,77,0.12),transparent_70%)]" />
+          <motion.div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#FDF5F8] to-transparent" />
           <div className="relative z-10 text-center px-4">
-            <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="text-5xl md:text-6xl font-bold text-white" style={{ fontFamily: "var(--font-heading)" }}>
-              Book Your <span className="gradient-text">Session</span>
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-5xl md:text-6xl font-light text-white"
+              style={{ fontFamily: "var(--font-heading)" }}
+            >
+              Book Your <em className="gradient-text not-italic font-semibold">Session</em>
             </motion.h1>
           </div>
         </section>
@@ -194,31 +206,31 @@ export default function BookingPage() {
             {/* Left perks */}
             <div className="lg:col-span-2">
               <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}>
-                <h2 className="text-2xl font-bold text-pink-950 mb-3" style={{ fontFamily: "var(--font-heading)" }}>
-                  Why Book With Us?
+                <h2 className="text-2xl font-light text-[#2A1520] mb-3" style={{ fontFamily: "var(--font-heading)" }}>
+                  Why Book <em className="gradient-text not-italic font-semibold">With Us?</em>
                 </h2>
-                <p className="text-gray-500 text-sm mb-8 leading-relaxed">
+                <p className="text-[#7A5A66] text-sm mb-8 leading-relaxed">
                   Reserve your spot with our premium stylists and experience beauty at its finest.
                 </p>
                 <div className="space-y-4 mb-10">
                   {perks.map((p) => (
-                    <div key={p.text} className="flex items-center gap-3 p-4 rounded-2xl bg-white border border-pink-100 shadow-sm">
-                      <div className="w-9 h-9 rounded-xl bg-gradient-to-br g-primary flex items-center justify-center shrink-0">
+                    <div key={p.text} className="flex items-center gap-3 p-4 rounded-2xl bg-white border border-[#EDD0D8] shadow-sm">
+                      <div className="w-9 h-9 rounded-xl g-primary flex items-center justify-center shrink-0">
                         <p.icon className="w-4 h-4 text-white" />
                       </div>
-                      <span className="text-sm text-gray-700 font-medium">{p.text}</span>
+                      <span className="text-sm text-[#4A3040] font-medium">{p.text}</span>
                     </div>
                   ))}
                 </div>
                 {/* Decorative card */}
-                <div className="relative rounded-3xl overflow-hidden h-40 bg-gradient-to-br from-pink-400 to-violet-600 p-6 flex flex-col justify-end">
+                <div className="relative rounded-3xl overflow-hidden h-40 bg-gradient-to-br from-rose-500 to-[#3D2030] p-6 flex flex-col justify-end">
                   <div className="absolute top-4 right-4">
                     <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 8, ease: "linear" }}>
-                      <Sparkles className="w-8 h-8 text-white/30" />
+                      <Sparkles className="w-8 h-8 text-white/20" />
                     </motion.div>
                   </div>
-                  <p className="text-white/70 text-xs uppercase tracking-wider">Walk-in also welcome</p>
-                  <p className="text-white font-bold text-lg" style={{ fontFamily: "var(--font-heading)" }}>Mon – Sun, 9 AM to 8 PM</p>
+                  <p className="text-white/60 text-xs uppercase tracking-[0.2em]">Walk-in also welcome</p>
+                  <p className="text-white font-semibold text-lg" style={{ fontFamily: "var(--font-heading)" }}>Mon – Sun, 9 AM to 8 PM</p>
                 </div>
               </motion.div>
             </div>
@@ -228,12 +240,12 @@ export default function BookingPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="lg:col-span-3 bg-white rounded-3xl p-8 md:p-10 shadow-2xl shadow-pink-100/60 border border-pink-100"
+              className="lg:col-span-3 bg-white rounded-3xl p-8 md:p-10 shadow-2xl shadow-pink-50/40 border border-[#EDD0D8]"
             >
-              <h3 className="text-xl font-bold text-pink-950 mb-6" style={{ fontFamily: "var(--font-heading)" }}>
+              <h3 className="text-xl font-light text-[#2A1520] mb-6" style={{ fontFamily: "var(--font-heading)" }}>
                 Appointment Details
               </h3>
-              <Suspense fallback={<div className="py-10 text-center text-gray-400 text-sm">Loading form...</div>}>
+              <Suspense fallback={<div className="py-10 text-center text-[#7A5A66] text-sm">Loading form...</div>}>
                 <BookingForm />
               </Suspense>
             </motion.div>

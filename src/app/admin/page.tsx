@@ -39,7 +39,7 @@ async function getDashboardData() {
 }
 
 const statusColors: Record<string, string> = {
-  pending:   "bg-amber-100 text-amber-700",
+  pending:   "bg-pink-50 text-rose-700",
   confirmed: "bg-green-100 text-green-700",
   cancelled: "bg-red-100 text-red-700",
 };
@@ -61,9 +61,9 @@ export default async function AdminDashboard() {
       </h1>
 
       {data.error && (
-        <div className="mb-6 p-4 rounded-2xl bg-amber-50 border border-amber-200 text-amber-700 text-sm">
+        <div className="mb-6 p-4 rounded-2xl bg-pink-50 border border-pink-100 text-rose-700 text-sm">
           <strong>Setup required:</strong> {data.error}
-          <p className="mt-1 text-xs text-amber-600">Copy <code>.env.local.example</code> → <code>.env.local</code> and fill in your Turso credentials.</p>
+          <p className="mt-1 text-xs text-rose-600">Copy <code>.env.local.example</code> → <code>.env.local</code> and fill in your Turso credentials.</p>
         </div>
       )}
 
